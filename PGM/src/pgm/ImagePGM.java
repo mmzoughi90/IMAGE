@@ -23,7 +23,7 @@ public class ImagePGM {
         this.l = l;
         this.h = h;
         this.grisMax = grisMax;
-        pixels = new ArrayList<ArrayList<Integer>>();
+        pixels = new ArrayList<>();
         int i, j;
         for (i = 0; i < l; i++) {
             for (j = 0; j < h; j++) {
@@ -134,7 +134,7 @@ public class ImagePGM {
     }
 
     public ImagePGM histogramme() {
-        ImagePGM histo = new ImagePGM(256, 0);
+        ImagePGM histo = new ImagePGM(256,0,255);
         ArrayList vectHisto = new ArrayList();
         int i, j;
         for (i = 0; i < 256; i++) {
