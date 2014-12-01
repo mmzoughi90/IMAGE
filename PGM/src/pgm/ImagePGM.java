@@ -1,3 +1,5 @@
+package pgm;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -22,6 +24,12 @@ public class ImagePGM {
         this.h = h;
         this.grisMax = grisMax;
         pixels = new ArrayList<ArrayList<Integer>>();
+        int i, j;
+        for (i = 0; i < l; i++) {
+            for (j = 0; j < h; j++) {
+                pixels.get(i).set(j, 0);
+            }
+        }
     }
 
     public int getL() {
@@ -99,8 +107,8 @@ public class ImagePGM {
         writer.write(l + " " + h + "\n");
         writer.write(grisMax + "\n");
 
-        for (ArrayList<Integer> l : this.pixels) {
-            for (int i : l) {
+        for (ArrayList<Integer> ln : this.pixels) {
+            for (int i : ln) {
                 writer.write(i + " ");
             }
             writer.write("\n");
@@ -108,6 +116,51 @@ public class ImagePGM {
         }
         writer.close();
 
+    }
+
+    public ImagePGM seuiller(int s) throws CloneNotSupportedException {
+        int i, j;
+        ImagePGM seuillage = (ImagePGM) this.clone();
+        for (i = 0; i < l; i++) {
+            for (j = 0; j < h; j++) {
+                if ((int) pixels.get(i).get(j) <= s) {
+                    seuillage.pixels.get(i).set(j, 0);
+                } else {
+                    seuillage.pixels.get(i).set(j, 255);
+                }
+            }
+        }
+        return seuillage;
+    }
+
+    public ImagePGM histogramme() {
+        ImagePGM histo = new ImagePGM(256, 0);
+        ArrayList vectHisto = new ArrayList();
+        int i, j;
+        for (i = 0; i < 256; i++) {
+            vectHisto.set(i, 0);
+        }
+        for (i = 0; i < l; i++) {
+            for (j = 0; j < h; j++) {
+                vectHisto.set((int) pixels.get(i).get(j), (int) vectHisto.get((int) pixels.get(i).get(j)) + 1);
+            }
+        }
+        for (i = 0; i < 256; i++) {
+            if (histo.getH() < (int) vectHisto.get(i)) {
+                histo.setH((int) vectHisto.get(i));
+            }
+        }
+        for (i = 0; i < 256; i++) {
+            for (j = 0; j < histo.getH(); j++) {
+                histo.pixels.get(i).set(j, 0);
+            }
+        }
+        for (i = 0; i < 256; i++) {
+            for (j = h - (int) vectHisto.get(i); j < h; j++) {
+                histo.pixels.get(i).set(j, 255);
+            }
+        }
+        return histo;
     }
 
 }
