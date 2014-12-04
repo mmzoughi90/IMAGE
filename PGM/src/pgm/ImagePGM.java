@@ -33,8 +33,7 @@ public class ImagePGM {
             ArrayList colonne = new ArrayList();
             pixels.add(colonne);
             for (j = 0; j < h; j++) {
-
-                pixels.get(i).set(j, 0);
+                pixels.get(i).add(j, 0);
             }
         }
     }
@@ -146,7 +145,7 @@ public class ImagePGM {
     public ImagePGM histogramme() {
         ArrayList vectHisto = new ArrayList();
         int i, j;
-        int h=0;
+        int hauteur=0;
         for (i = 0; i < 256; i++) {
             vectHisto.add(i, 0);
         }
@@ -156,11 +155,11 @@ public class ImagePGM {
             }
         }
         for (i = 0; i < 256; i++) {
-            if (h < (int) vectHisto.get(i)) {
-                h=(int) vectHisto.get(i);
+            if (hauteur < (int) vectHisto.get(i)) {
+                hauteur=(int) vectHisto.get(i);
             }
         }
-        ImagePGM histo = new ImagePGM(256, h, 255);
+        ImagePGM histo = new ImagePGM(256, hauteur, 255);
         for (i = 0; i < 256; i++) {
             for (j = h - (int) vectHisto.get(i); j < h; j++) {
                 histo.pixels.get(i).set(j, 255);

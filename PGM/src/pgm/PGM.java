@@ -24,7 +24,7 @@ public class PGM {
             im.ecrirePGM("lena2");
             
             im.histogramme();
-            
+            System.out.println(im.histogramme().getPixels());
             
 
         } catch (IOException e) {
