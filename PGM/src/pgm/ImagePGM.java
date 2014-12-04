@@ -23,13 +23,17 @@ public class ImagePGM {
         this.l = l;
         this.h = h;
         this.grisMax = grisMax;
-        pixels = new ArrayList<>();
-        int i, j;
+        pixels = new ArrayList<ArrayList<Integer>>();
+        /*int i, j;
         for (i = 0; i < l; i++) {
+            ArrayList colonne = new ArrayList();
+                pixels.add(colonne);
             for (j = 0; j < h; j++) {
+                
                 pixels.get(i).set(j, 0);
             }
-        }
+        }*/
+        
     }
 
     public int getL() {
@@ -65,37 +69,38 @@ public class ImagePGM {
     }
 
     // méthode permettant la lecture d'un PGM
-    public ImagePGM(String texte) {
+    public ImagePGM(String texte) throws IOException {
         Reader reader = new FileReader(texte + ".pgm");
-        BufferReader in = new BufferReader(reader);
-        String ligne = in.readline();
+        BufferedReader in = new BufferedReader(reader);
+        String ligne = in.readLine();
 
         int n;
-        n = 0;
-        while (ligne
-                != null) {
-
-            String delimiteur = " ";
+        n = 1;
+        while (ligne!= null) {
+           
+            
+            String delimiteur = " \t";
             StringTokenizer st = new StringTokenizer(ligne, delimiteur);
             ArrayList<Integer> mots = new ArrayList<Integer>();
-            if (n = 3) {
+            if (n == 3) {
                 this.l = Integer.parseInt(st.nextToken());
                 this.h = Integer.parseInt(st.nextToken());
             }
-            if (n = 4) {
+            if (n == 4) {
                 this.grisMax = Integer.parseInt(st.nextToken());
             }
             if (n >= 5) {
                 while (st.hasMoreTokens()) {
 
                     Integer mot = Integer.parseInt(st.nextToken());
-
-                    mots.add(pix);
+                  
+                    mots.add(mot);
                 }
-
-            }
+            
             this.pixels.add(mots);
+            }
             n++;
+            ligne=in.readLine();
         }
     }
 
@@ -106,14 +111,15 @@ public class ImagePGM {
         writer.write("#" + "\n");
         writer.write(l + " " + h + "\n");
         writer.write(grisMax + "\n");
-
+        if (pixels!=null){
+            System.out.println("qdfsdfsg");
         for (ArrayList<Integer> ln : this.pixels) {
             for (int i : ln) {
                 writer.write(i + " ");
             }
             writer.write("\n");
             writer.flush();
-        }
+        }}
         writer.close();
 
     }
