@@ -17,11 +17,12 @@ public class PGM {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
         try {
             ImagePGM im = new ImagePGM("lena");
-
-            im.ecrirePGM("lena2");
+            
+            System.out.println(im.seuiller(150).getPixels());
+            
             
             ImagePGM histo = im.histogramme();
             int c=0;

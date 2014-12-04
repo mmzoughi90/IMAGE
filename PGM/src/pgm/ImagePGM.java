@@ -38,6 +38,18 @@ public class ImagePGM {
         }
     }
 
+    @Override
+    public ImagePGM clone() {
+        ImagePGM copie = new ImagePGM(l,h,grisMax);
+        for(int i=0;i<l;i++)
+        {
+            for(int j=0;j<h;j++)
+            {
+                copie.pixels.get(i).set(j, this.pixels.get(i).get(j));
+            }
+        }
+        return copie;
+    }
     public int getL() {
         return l;
     }
@@ -107,29 +119,28 @@ public class ImagePGM {
     }
 
 // ecrire une image PGM
-    public void ecrirePGM(String nom) throws IOException {
-        Writer writer = new FileWriter(nom + ".pgm");
-        writer.write("P2" + "\n");
-        writer.write("#" + "\n");
-        writer.write(l + " " + h + "\n");
-        writer.write(grisMax + "\n");
-        if (pixels != null) {
-            System.out.println("qdfsdfsg");
-            for (ArrayList<Integer> ln : this.pixels) {
-                for (int i : ln) {
-                    writer.write(i + "\t");
+    public ImagePGM ecrirePGM(String nom) throws IOException {
+        try (Writer writer = new FileWriter(nom + ".pgm")) {
+            writer.write("P2" + "\n");
+            writer.write("#" + "\n");
+            writer.write(l + " " + h + "\n");
+            writer.write(grisMax + "\n");
+            if (pixels != null) {
+                for (ArrayList<Integer> ln : this.pixels) {
+                    for (int i : ln) {
+                        writer.write(i + "\t");
+                    }
+                    writer.write("\n");
+                    writer.flush();
                 }
-                writer.write("\n");
-                writer.flush();
             }
         }
-        writer.close();
-
+        return this;
     }
 
     public ImagePGM seuiller(int s) throws CloneNotSupportedException {
         int i, j;
-        ImagePGM seuillage = (ImagePGM) this.clone();
+        ImagePGM seuillage = this.clone();
         for (i = 0; i < l; i++) {
             for (j = 0; j < h; j++) {
                 if ((int) pixels.get(i).get(j) <= s) {
