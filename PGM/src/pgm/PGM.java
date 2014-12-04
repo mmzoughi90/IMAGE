@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package pgm;
+
 import java.util.*;
 import java.io.*;
 
@@ -17,13 +18,18 @@ public class PGM {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       try 
-       {ImagePGM im= new ImagePGM("lena");
-       
-       im.ecrirePGM("lena2");}
-       catch (IOException e) {
-           e.printStackTrace();
+        try {
+            ImagePGM im = new ImagePGM("lena");
+
+            im.ecrirePGM("lena2");
+            
+            im.histogramme();
+            
+            
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
-    
-}
 }

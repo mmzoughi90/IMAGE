@@ -24,16 +24,15 @@ public class ImagePGM {
         this.h = h;
         this.grisMax = grisMax;
         pixels = new ArrayList<ArrayList<Integer>>();
-        /*int i, j;
+        int i, j;
         for (i = 0; i < l; i++) {
             ArrayList colonne = new ArrayList();
-                pixels.add(colonne);
+            pixels.add(colonne);
             for (j = 0; j < h; j++) {
-                
+
                 pixels.get(i).set(j, 0);
             }
-        }*/
-        
+        }
     }
 
     public int getL() {
@@ -70,15 +69,15 @@ public class ImagePGM {
 
     // méthode permettant la lecture d'un PGM
     public ImagePGM(String texte) throws IOException {
+        pixels = new ArrayList<ArrayList<Integer>>();
         Reader reader = new FileReader(texte + ".pgm");
         BufferedReader in = new BufferedReader(reader);
         String ligne = in.readLine();
 
         int n;
         n = 1;
-        while (ligne!= null) {
-           
-            
+        while (ligne != null) {
+
             String delimiteur = " \t";
             StringTokenizer st = new StringTokenizer(ligne, delimiteur);
             ArrayList<Integer> mots = new ArrayList<Integer>();
@@ -93,14 +92,14 @@ public class ImagePGM {
                 while (st.hasMoreTokens()) {
 
                     Integer mot = Integer.parseInt(st.nextToken());
-                  
+
                     mots.add(mot);
                 }
-            
-            this.pixels.add(mots);
+
+                this.pixels.add(mots);
             }
             n++;
-            ligne=in.readLine();
+            ligne = in.readLine();
         }
     }
 
@@ -111,15 +110,16 @@ public class ImagePGM {
         writer.write("#" + "\n");
         writer.write(l + " " + h + "\n");
         writer.write(grisMax + "\n");
-        if (pixels!=null){
+        if (pixels != null) {
             System.out.println("qdfsdfsg");
-        for (ArrayList<Integer> ln : this.pixels) {
-            for (int i : ln) {
-                writer.write(i + " ");
+            for (ArrayList<Integer> ln : this.pixels) {
+                for (int i : ln) {
+                    writer.write(i + "\t");
+                }
+                writer.write("\n");
+                writer.flush();
             }
-            writer.write("\n");
-            writer.flush();
-        }}
+        }
         writer.close();
 
     }
@@ -140,7 +140,7 @@ public class ImagePGM {
     }
 
     public ImagePGM histogramme() {
-        ImagePGM histo = new ImagePGM(256,0,255);
+        ImagePGM histo = new ImagePGM(256, 0, 255);
         ArrayList vectHisto = new ArrayList();
         int i, j;
         for (i = 0; i < 256; i++) {
