@@ -23,7 +23,11 @@ public class ImagePGM {
         this.l = l;
         this.h = h;
         this.grisMax = grisMax;
-        pixels = new ArrayList<ArrayList<Integer>>();
+        if(l*h==0)
+        {
+            pixels = null;
+        }
+        pixels = new ArrayList<>();
         int i, j;
         for (i = 0; i < l; i++) {
             ArrayList colonne = new ArrayList();
@@ -69,7 +73,7 @@ public class ImagePGM {
 
     // méthode permettant la lecture d'un PGM
     public ImagePGM(String texte) throws IOException {
-        pixels = new ArrayList<ArrayList<Integer>>();
+        pixels = new ArrayList<>();
         Reader reader = new FileReader(texte + ".pgm");
         BufferedReader in = new BufferedReader(reader);
         String ligne = in.readLine();
@@ -80,7 +84,7 @@ public class ImagePGM {
 
             String delimiteur = " \t";
             StringTokenizer st = new StringTokenizer(ligne, delimiteur);
-            ArrayList<Integer> mots = new ArrayList<Integer>();
+            ArrayList<Integer> mots = new ArrayList<>();
             if (n == 3) {
                 this.l = Integer.parseInt(st.nextToken());
                 this.h = Integer.parseInt(st.nextToken());
@@ -140,11 +144,11 @@ public class ImagePGM {
     }
 
     public ImagePGM histogramme() {
-        ImagePGM histo = new ImagePGM(256, 0, 255);
         ArrayList vectHisto = new ArrayList();
         int i, j;
+        int h=0;
         for (i = 0; i < 256; i++) {
-            vectHisto.set(i, 0);
+            vectHisto.add(i, 0);
         }
         for (i = 0; i < l; i++) {
             for (j = 0; j < h; j++) {
@@ -152,15 +156,11 @@ public class ImagePGM {
             }
         }
         for (i = 0; i < 256; i++) {
-            if (histo.getH() < (int) vectHisto.get(i)) {
-                histo.setH((int) vectHisto.get(i));
+            if (h < (int) vectHisto.get(i)) {
+                h=(int) vectHisto.get(i);
             }
         }
-        for (i = 0; i < 256; i++) {
-            for (j = 0; j < histo.getH(); j++) {
-                histo.pixels.get(i).set(j, 0);
-            }
-        }
+        ImagePGM histo = new ImagePGM(256, h, 255);
         for (i = 0; i < 256; i++) {
             for (j = h - (int) vectHisto.get(i); j < h; j++) {
                 histo.pixels.get(i).set(j, 255);
