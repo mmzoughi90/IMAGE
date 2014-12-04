@@ -161,7 +161,7 @@ public class ImagePGM {
         }
         ImagePGM histo = new ImagePGM(256, hauteur, 255);
         for (i = 0; i < 256; i++) {
-            for (j = h - (int) vectHisto.get(i); j < h; j++) {
+            for (j = hauteur - (int) vectHisto.get(i); j < hauteur; j++) {
                 histo.pixels.get(i).set(j, 255);
             }
         }

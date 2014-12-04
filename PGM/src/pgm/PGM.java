@@ -23,8 +23,19 @@ public class PGM {
 
             im.ecrirePGM("lena2");
             
-            im.histogramme();
-            System.out.println(im.histogramme().getPixels());
+            ImagePGM histo = im.histogramme();
+            int c=0;
+            for(int i=0;i<histo.getL();i++)
+            {
+                for(int j=0;j<histo.getH();j++)
+                {
+                    if(histo.getPixels().get(i).get(j)==255)
+                    {
+                        c++;
+                    }
+                }
+            }
+            System.out.println(c);
             
 
         } catch (IOException e) {
