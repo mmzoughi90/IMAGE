@@ -39,7 +39,7 @@ public class ImagePGM {
     }
 
     @Override
-    public ImagePGM clone() {
+    public ImagePGM clone() throws CloneNotSupportedException {
         ImagePGM copie = new ImagePGM(l,h,grisMax);
         for(int i=0;i<l;i++)
         {
@@ -178,5 +178,8 @@ public class ImagePGM {
         }
         return histo;
     }
-
+    public boolean equals(ImagePGM image)
+    {
+        return (image.getGrisMax()==grisMax && image.getPixels().equals(pixels));
+    }
 }
