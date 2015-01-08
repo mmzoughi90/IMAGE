@@ -18,7 +18,7 @@ public class PGM {
      * @param args the command line arguments
      * @throws java.lang.CloneNotSupportedException
      */
-    public static void main(String[] args){
-        
-}
+    public static void main(String[] args) {
+
+    }
 }

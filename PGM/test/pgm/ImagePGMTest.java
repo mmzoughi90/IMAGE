@@ -17,14 +17,14 @@ import static org.junit.Assert.*;
  * @author user
  */
 public class ImagePGMTest {
-    
+
     public ImagePGMTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
@@ -66,7 +66,7 @@ public class ImagePGMTest {
      */
     @Test
     public void testGetGrisMax() {
-     
+
     }
 
     /**
@@ -90,7 +90,7 @@ public class ImagePGMTest {
      */
     @Test
     public void testSetPixels() {
- 
+
     }
 
     /**
@@ -104,22 +104,24 @@ public class ImagePGMTest {
 
     /**
      * Test of seuiller method, of class ImagePGM.
+     *
      * @throws java.lang.Exception
      */
     @Test
     public void testSeuiller() throws Exception {
         System.out.println("seuiller");
         ImagePGM image = new ImagePGM("lena");
-        int s = 0 + (int) (255*Math.random());
-        int i = 0 + (int) ((image.getL() - 1)*Math.random());
-        int j = 0 + (int) ((image.getH() - 1)*Math.random());
-        boolean b1 = image.seuiller(s).getPixels().get(i).get(j)==255 && image.getPixels().get(i).get(j)>=s;
-        boolean b2 = image.seuiller(s).getPixels().get(i).get(j)==0 && image.getPixels().get(i).get(j)<s;
+        int s = 0 + (int) (255 * Math.random());
+        int i = 0 + (int) ((image.getL() - 1) * Math.random());
+        int j = 0 + (int) ((image.getH() - 1) * Math.random());
+        boolean b1 = image.seuiller(s).getPixels().get(i).get(j) == 255 && image.getPixels().get(i).get(j) >= s;
+        boolean b2 = image.seuiller(s).getPixels().get(i).get(j) == 0 && image.getPixels().get(i).get(j) < s;
         assertTrue(b1 || b2);
     }
 
     /**
      * Test of histogramme method, of class ImagePGM.
+     *
      * @throws java.io.IOException
      */
     @Test
@@ -127,26 +129,21 @@ public class ImagePGMTest {
         System.out.println("histogramme");
         ImagePGM image = new ImagePGM("lena");
         ImagePGM histo = image.histogramme();
-        int a=0;
-        int b=0;
-        int i = 0 + (int) (255*Math.random());
-        for(int j=0; j<histo.getH();j++)
-        {
-            if(histo.getPixels().get(i).get(j)==255)
-            {
+        int a = 0;
+        int b = 0;
+        int i = 0 + (int) (255 * Math.random());
+        for (int j = 0; j < histo.getH(); j++) {
+            if (histo.getPixels().get(i).get(j) == 255) {
                 a++;
             }
         }
-        for(int k=0;k<image.getL();k++)
-        {
-            for(int j=0;j<image.getH();j++)
-            {
-                if(image.getPixels().get(k).get(j)==i)
-                {
+        for (int k = 0; k < image.getL(); k++) {
+            for (int j = 0; j < image.getH(); j++) {
+                if (image.getPixels().get(k).get(j) == i) {
                     b++;
                 }
             }
         }
-        assertTrue(a==b);
+        assertTrue(a == b);
     }
 }

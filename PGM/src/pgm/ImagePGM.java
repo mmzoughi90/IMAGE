@@ -23,8 +23,7 @@ public class ImagePGM {
         this.l = l;
         this.h = h;
         this.grisMax = grisMax;
-        if(l*h==0)
-        {
+        if (l * h == 0) {
             pixels = null;
         }
         pixels = new ArrayList<>();
@@ -40,16 +39,15 @@ public class ImagePGM {
 
     @Override
     public ImagePGM clone() {
-        ImagePGM copie = new ImagePGM(l,h,grisMax);
-        for(int i=0;i<l;i++)
-        {
-            for(int j=0;j<h;j++)
-            {
+        ImagePGM copie = new ImagePGM(l, h, grisMax);
+        for (int i = 0; i < l; i++) {
+            for (int j = 0; j < h; j++) {
                 copie.pixels.get(i).set(j, this.pixels.get(i).get(j));
             }
         }
         return copie;
     }
+
     public int getL() {
         return l;
     }
@@ -156,7 +154,7 @@ public class ImagePGM {
     public ImagePGM histogramme() {
         ArrayList vectHisto = new ArrayList();
         int i, j;
-        int hauteur=0;
+        int hauteur = 0;
         for (i = 0; i < 256; i++) {
             vectHisto.add(i, 0);
         }
@@ -167,7 +165,7 @@ public class ImagePGM {
         }
         for (i = 0; i < 256; i++) {
             if (hauteur < (int) vectHisto.get(i)) {
-                hauteur=(int) vectHisto.get(i);
+                hauteur = (int) vectHisto.get(i);
             }
         }
         ImagePGM histo = new ImagePGM(256, hauteur, 255);

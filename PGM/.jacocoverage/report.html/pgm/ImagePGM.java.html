@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ImagePGM.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;PGM&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">pgm</a> &gt; <span class="el_source">ImagePGM.java</span></div><h1>ImagePGM.java</h1><pre class="source lang-java linenums">package pgm;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ *
+ * @author Mzoughi
+ */
+import java.util.*;
+import java.io.*;
+
+public class ImagePGM {
+
+    private int l;
+    private int h;
+    private int grisMax;
+    private ArrayList&lt;ArrayList&lt;Integer&gt;&gt; pixels;
+
+<span class="fc" id="L22">    public ImagePGM(int l, int h, int grisMax) {</span>
+<span class="fc" id="L23">        this.l = l;</span>
+<span class="fc" id="L24">        this.h = h;</span>
+<span class="fc" id="L25">        this.grisMax = grisMax;</span>
+<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (l * h == 0) {</span>
+<span class="nc" id="L27">            pixels = null;</span>
+        }
+<span class="fc" id="L29">        pixels = new ArrayList&lt;&gt;();</span>
+        int i, j;
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        for (i = 0; i &lt; l; i++) {</span>
+<span class="fc" id="L32">            ArrayList colonne = new ArrayList();</span>
+<span class="fc" id="L33">            pixels.add(colonne);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            for (j = 0; j &lt; h; j++) {</span>
+<span class="fc" id="L35">                pixels.get(i).add(j, 0);</span>
+            }
+        }
+<span class="fc" id="L38">    }</span>
+
+    @Override
+    public ImagePGM clone() {
+<span class="fc" id="L42">        ImagePGM copie = new ImagePGM(l, h, grisMax);</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        for (int i = 0; i &lt; l; i++) {</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            for (int j = 0; j &lt; h; j++) {</span>
+<span class="fc" id="L45">                copie.pixels.get(i).set(j, this.pixels.get(i).get(j));</span>
+            }
+        }
+<span class="fc" id="L48">        return copie;</span>
+    }
+
+    public int getL() {
+<span class="fc" id="L52">        return l;</span>
+    }
+
+    public void setL(int l) {
+<span class="nc" id="L56">        this.l = l;</span>
+<span class="nc" id="L57">    }</span>
+
+    public int getH() {
+<span class="fc" id="L60">        return h;</span>
+    }
+
+    public void setH(int h) {
+<span class="nc" id="L64">        this.h = h;</span>
+<span class="nc" id="L65">    }</span>
+
+    public int getGrisMax() {
+<span class="nc" id="L68">        return grisMax;</span>
+    }
+
+    public void setGrisMax(int grisMax) {
+<span class="nc" id="L72">        this.grisMax = grisMax;</span>
+<span class="nc" id="L73">    }</span>
+
+    public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; getPixels() {
+<span class="fc" id="L76">        return pixels;</span>
+    }
+
+    public void setPixels(ArrayList&lt;ArrayList&lt;Integer&gt;&gt; pixels) {
+<span class="nc" id="L80">        this.pixels = pixels;</span>
+<span class="nc" id="L81">    }</span>
+
+    // méthode permettant la lecture d'un PGM
+<span class="fc" id="L84">    public ImagePGM(String texte) throws IOException {</span>
+<span class="fc" id="L85">        pixels = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L86">        Reader reader = new FileReader(texte + &quot;.pgm&quot;);</span>
+<span class="fc" id="L87">        BufferedReader in = new BufferedReader(reader);</span>
+<span class="fc" id="L88">        String ligne = in.readLine();</span>
+
+        int n;
+<span class="fc" id="L91">        n = 1;</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        while (ligne != null) {</span>
+
+<span class="fc" id="L94">            String delimiteur = &quot; \t&quot;;</span>
+<span class="fc" id="L95">            StringTokenizer st = new StringTokenizer(ligne, delimiteur);</span>
+<span class="fc" id="L96">            ArrayList&lt;Integer&gt; mots = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">            if (n == 3) {</span>
+<span class="fc" id="L98">                this.l = Integer.parseInt(st.nextToken());</span>
+<span class="fc" id="L99">                this.h = Integer.parseInt(st.nextToken());</span>
+            }
+<span class="fc bfc" id="L101" title="All 2 branches covered.">            if (n == 4) {</span>
+<span class="fc" id="L102">                this.grisMax = Integer.parseInt(st.nextToken());</span>
+            }
+<span class="fc bfc" id="L104" title="All 2 branches covered.">            if (n &gt;= 5) {</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">                while (st.hasMoreTokens()) {</span>
+
+<span class="fc" id="L107">                    Integer mot = Integer.parseInt(st.nextToken());</span>
+
+<span class="fc" id="L109">                    mots.add(mot);</span>
+<span class="fc" id="L110">                }</span>
+
+<span class="fc" id="L112">                this.pixels.add(mots);</span>
+            }
+<span class="fc" id="L114">            n++;</span>
+<span class="fc" id="L115">            ligne = in.readLine();</span>
+<span class="fc" id="L116">        }</span>
+<span class="fc" id="L117">    }</span>
+
+// ecrire une image PGM
+    public ImagePGM ecrirePGM(String nom) throws IOException {
+<span class="nc" id="L121">        try (Writer writer = new FileWriter(nom + &quot;.pgm&quot;)) {</span>
+<span class="nc" id="L122">            writer.write(&quot;P2&quot; + &quot;\n&quot;);</span>
+<span class="nc" id="L123">            writer.write(&quot;#&quot; + &quot;\n&quot;);</span>
+<span class="nc" id="L124">            writer.write(l + &quot; &quot; + h + &quot;\n&quot;);</span>
+<span class="nc" id="L125">            writer.write(grisMax + &quot;\n&quot;);</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">            if (pixels != null) {</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                for (ArrayList&lt;Integer&gt; ln : this.pixels) {</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">                    for (int i : ln) {</span>
+<span class="nc" id="L129">                        writer.write(i + &quot;\t&quot;);</span>
+<span class="nc" id="L130">                    }</span>
+<span class="nc" id="L131">                    writer.write(&quot;\n&quot;);</span>
+<span class="nc" id="L132">                    writer.flush();</span>
+<span class="nc" id="L133">                }</span>
+            }
+<span class="nc bnc" id="L135" title="All 8 branches missed.">        }</span>
+<span class="nc" id="L136">        return this;</span>
+    }
+
+    public ImagePGM seuiller(int s) throws CloneNotSupportedException {
+        int i, j;
+<span class="fc" id="L141">        ImagePGM seuillage = this.clone();</span>
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        for (i = 0; i &lt; l; i++) {</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">            for (j = 0; j &lt; h; j++) {</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">                if ((int) pixels.get(i).get(j) &lt;= s) {</span>
+<span class="fc" id="L145">                    seuillage.pixels.get(i).set(j, 0);</span>
+                } else {
+<span class="fc" id="L147">                    seuillage.pixels.get(i).set(j, 255);</span>
+                }
+            }
+        }
+<span class="fc" id="L151">        return seuillage;</span>
+    }
+
+    public ImagePGM histogramme() {
+<span class="fc" id="L155">        ArrayList vectHisto = new ArrayList();</span>
+        int i, j;
+<span class="fc" id="L157">        int hauteur = 0;</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">        for (i = 0; i &lt; 256; i++) {</span>
+<span class="fc" id="L159">            vectHisto.add(i, 0);</span>
+        }
+<span class="fc bfc" id="L161" title="All 2 branches covered.">        for (i = 0; i &lt; l; i++) {</span>
+<span class="fc bfc" id="L162" title="All 2 branches covered.">            for (j = 0; j &lt; h; j++) {</span>
+<span class="fc" id="L163">                vectHisto.set((int) pixels.get(i).get(j), (int) vectHisto.get((int) pixels.get(i).get(j)) + 1);</span>
+            }
+        }
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        for (i = 0; i &lt; 256; i++) {</span>
+<span class="fc bfc" id="L167" title="All 2 branches covered.">            if (hauteur &lt; (int) vectHisto.get(i)) {</span>
+<span class="fc" id="L168">                hauteur = (int) vectHisto.get(i);</span>
+            }
+        }
+<span class="fc" id="L171">        ImagePGM histo = new ImagePGM(256, hauteur, 255);</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">        for (i = 0; i &lt; 256; i++) {</span>
+<span class="fc bfc" id="L173" title="All 2 branches covered.">            for (j = hauteur - (int) vectHisto.get(i); j &lt; hauteur; j++) {</span>
+<span class="fc" id="L174">                histo.pixels.get(i).set(j, 255);</span>
+            }
+        }
+<span class="fc" id="L177">        return histo;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.2.201409121644</span></div></body></html>
