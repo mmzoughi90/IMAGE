@@ -99,27 +99,24 @@ public class ImagePGMTest {
      */
     @Test
 
-    public void testEcrirePGM() throws IOException{
+    public void testEcrirePGM() throws IOException {
 
         System.out.println("ecrirePGM");
 
-
-        int longueur = 1 + (int) ((Integer.MAX_VALUE)*Math.random());
-        int hauteur = 1 + (int) ((Integer.MAX_VALUE)*Math.random());
+        int longueur = 1 + (int) ((Integer.MAX_VALUE) * Math.random());
+        int hauteur = 1 + (int) ((Integer.MAX_VALUE) * Math.random());
         int v;
-        ImagePGM image = new ImagePGM(longueur,hauteur,255);
-        for(int i=0; i<longueur; i++)
-        {
-            for(int j=0; j<hauteur;j++)
-            {
-                v = 1 + (int) (255*Math.random());
+        ImagePGM image = new ImagePGM(longueur, hauteur, 255);
+        for (int i = 0; i < longueur; i++) {
+            for (int j = 0; j < hauteur; j++) {
+                v = 1 + (int) (255 * Math.random());
 
                 image.getPixels().get(i).add(j, v);
             }
         }
         image.ecrirePGM("imageEcrite");
         ImagePGM imageEcrite = new ImagePGM("imageEcrite");
-        assertTrue(imageEcrite.equals(image));
+        assertTrue(imageEcrite.comparer(image));
     }
 
     /**

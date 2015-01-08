@@ -37,15 +37,10 @@ public class ImagePGM {
         }
     }
 
-
-
-
-    public ImagePGM clone() throws CloneNotSupportedException {
-        ImagePGM copie = new ImagePGM(l,h,grisMax);
-        for(int i=0;i<l;i++)
-        {
-            for(int j=0;j<h;j++)
-            {
+    public ImagePGM copier() {
+        ImagePGM copie = new ImagePGM(l, h, grisMax);
+        for (int i = 0; i < l; i++) {
+            for (int j = 0; j < h; j++) {
                 copie.pixels.get(i).set(j, this.pixels.get(i).get(j));
             }
         }
@@ -140,9 +135,9 @@ public class ImagePGM {
         return this;
     }
 
-    public ImagePGM seuiller(int s) throws CloneNotSupportedException {
+    public ImagePGM seuiller(int s) {
         int i, j;
-        ImagePGM seuillage = this.clone();
+        ImagePGM seuillage = this.copier();
         for (i = 0; i < l; i++) {
             for (j = 0; j < h; j++) {
                 if ((int) pixels.get(i).get(j) <= s) {
@@ -180,8 +175,8 @@ public class ImagePGM {
         }
         return histo;
     }
-    public boolean equals(ImagePGM image)
-    {
-        return (image.getGrisMax()==grisMax && image.getPixels().equals(pixels));
+
+    public boolean comparer(ImagePGM image) {
+        return image.getGrisMax() == grisMax && image.getPixels().equals(pixels);
     }
 }
