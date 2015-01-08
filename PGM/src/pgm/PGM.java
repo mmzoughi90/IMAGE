@@ -19,6 +19,13 @@ public class PGM {
      * @throws java.lang.CloneNotSupportedException
      */
     public static void main(String[] args) {
-
+        try {
+            ImagePGM image = new ImagePGM("lena");
+            image.seuiller(250).ecrirePGM("lena2");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (CloneNotSupportedException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

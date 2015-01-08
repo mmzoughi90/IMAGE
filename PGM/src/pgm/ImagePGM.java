@@ -17,7 +17,7 @@ public class ImagePGM {
     private int l;
     private int h;
     private int grisMax;
-    private ArrayList<ArrayList<Integer>> pixels;
+    private List<List<Integer>> pixels;
 
     public ImagePGM(int l, int h, int grisMax) {
         this.l = l;
@@ -29,7 +29,7 @@ public class ImagePGM {
         pixels = new ArrayList<>();
         int i, j;
         for (i = 0; i < l; i++) {
-            ArrayList colonne = new ArrayList();
+            List colonne = new ArrayList();
             pixels.add(colonne);
             for (j = 0; j < h; j++) {
                 pixels.get(i).add(j, 0);
@@ -72,11 +72,11 @@ public class ImagePGM {
         this.grisMax = grisMax;
     }
 
-    public ArrayList<ArrayList<Integer>> getPixels() {
+    public List<List<Integer>> getPixels() {
         return pixels;
     }
 
-    public void setPixels(ArrayList<ArrayList<Integer>> pixels) {
+    public void setPixels(List<List<Integer>> pixels) {
         this.pixels = pixels;
     }
 
@@ -93,7 +93,7 @@ public class ImagePGM {
 
             String delimiteur = " \t";
             StringTokenizer st = new StringTokenizer(ligne, delimiteur);
-            ArrayList<Integer> mots = new ArrayList<>();
+            List<Integer> mots = new ArrayList<>();
             if (n == 3) {
                 this.l = Integer.parseInt(st.nextToken());
                 this.h = Integer.parseInt(st.nextToken());
@@ -124,7 +124,7 @@ public class ImagePGM {
             writer.write(l + " " + h + "\n");
             writer.write(grisMax + "\n");
             if (pixels != null) {
-                for (ArrayList<Integer> ln : this.pixels) {
+                for (List<Integer> ln : this.pixels) {
                     for (int i : ln) {
                         writer.write(i + "\t");
                     }
@@ -152,7 +152,7 @@ public class ImagePGM {
     }
 
     public ImagePGM histogramme() {
-        ArrayList vectHisto = new ArrayList();
+        List vectHisto = new ArrayList();
         int i, j;
         int hauteur = 0;
         for (i = 0; i < 256; i++) {

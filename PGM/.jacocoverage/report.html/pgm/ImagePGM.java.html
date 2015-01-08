@@ -17,7 +17,7 @@ public class ImagePGM {
     private int l;
     private int h;
     private int grisMax;
-    private ArrayList&lt;ArrayList&lt;Integer&gt;&gt; pixels;
+    private List&lt;List&lt;Integer&gt;&gt; pixels;
 
 <span class="fc" id="L22">    public ImagePGM(int l, int h, int grisMax) {</span>
 <span class="fc" id="L23">        this.l = l;</span>
@@ -29,7 +29,7 @@ public class ImagePGM {
 <span class="fc" id="L29">        pixels = new ArrayList&lt;&gt;();</span>
         int i, j;
 <span class="fc bfc" id="L31" title="All 2 branches covered.">        for (i = 0; i &lt; l; i++) {</span>
-<span class="fc" id="L32">            ArrayList colonne = new ArrayList();</span>
+<span class="fc" id="L32">            List colonne = new ArrayList();</span>
 <span class="fc" id="L33">            pixels.add(colonne);</span>
 <span class="fc bfc" id="L34" title="All 2 branches covered.">            for (j = 0; j &lt; h; j++) {</span>
 <span class="fc" id="L35">                pixels.get(i).add(j, 0);</span>
@@ -72,11 +72,11 @@ public class ImagePGM {
 <span class="nc" id="L72">        this.grisMax = grisMax;</span>
 <span class="nc" id="L73">    }</span>
 
-    public ArrayList&lt;ArrayList&lt;Integer&gt;&gt; getPixels() {
+    public List&lt;List&lt;Integer&gt;&gt; getPixels() {
 <span class="fc" id="L76">        return pixels;</span>
     }
 
-    public void setPixels(ArrayList&lt;ArrayList&lt;Integer&gt;&gt; pixels) {
+    public void setPixels(List&lt;List&lt;Integer&gt;&gt; pixels) {
 <span class="nc" id="L80">        this.pixels = pixels;</span>
 <span class="nc" id="L81">    }</span>
 
@@ -93,7 +93,7 @@ public class ImagePGM {
 
 <span class="fc" id="L94">            String delimiteur = &quot; \t&quot;;</span>
 <span class="fc" id="L95">            StringTokenizer st = new StringTokenizer(ligne, delimiteur);</span>
-<span class="fc" id="L96">            ArrayList&lt;Integer&gt; mots = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L96">            List&lt;Integer&gt; mots = new ArrayList&lt;&gt;();</span>
 <span class="fc bfc" id="L97" title="All 2 branches covered.">            if (n == 3) {</span>
 <span class="fc" id="L98">                this.l = Integer.parseInt(st.nextToken());</span>
 <span class="fc" id="L99">                this.h = Integer.parseInt(st.nextToken());</span>
@@ -124,7 +124,7 @@ public class ImagePGM {
 <span class="nc" id="L124">            writer.write(l + &quot; &quot; + h + &quot;\n&quot;);</span>
 <span class="nc" id="L125">            writer.write(grisMax + &quot;\n&quot;);</span>
 <span class="nc bnc" id="L126" title="All 2 branches missed.">            if (pixels != null) {</span>
-<span class="nc bnc" id="L127" title="All 2 branches missed.">                for (ArrayList&lt;Integer&gt; ln : this.pixels) {</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                for (List&lt;Integer&gt; ln : this.pixels) {</span>
 <span class="nc bnc" id="L128" title="All 2 branches missed.">                    for (int i : ln) {</span>
 <span class="nc" id="L129">                        writer.write(i + &quot;\t&quot;);</span>
 <span class="nc" id="L130">                    }</span>
@@ -152,7 +152,7 @@ public class ImagePGM {
     }
 
     public ImagePGM histogramme() {
-<span class="fc" id="L155">        ArrayList vectHisto = new ArrayList();</span>
+<span class="fc" id="L155">        List vectHisto = new ArrayList();</span>
         int i, j;
 <span class="fc" id="L157">        int hauteur = 0;</span>
 <span class="fc bfc" id="L158" title="All 2 branches covered.">        for (i = 0; i &lt; 256; i++) {</span>
